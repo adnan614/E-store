@@ -1,473 +1,437 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="icon" href="assets/images/favicon.png" >
-        <!--Page title-->
-        <title>Admin DIT</title>
-        <!--bootstrap-->
-        <link rel="stylesheet" href="{{asset('public/panel/assets/css/bootstrap.min.css')}}">
-        <!--font awesome-->
-        <link rel="stylesheet" href="{{asset('public/panel/assets/css/all.min.css')}}">
-        <!-- metis menu -->
-        <link rel="stylesheet" href="{{asset('public/panel/assets/plugins/metismenu-3.0.4/assets/css/metisMenu.min.css')}}">
-        <link rel="stylesheet" href="{{asset('public/panel/assets/plugins/metismenu-3.0.4/assets/css/mm-vertical-hover.css')}}">
-        <!-- chart -->
-         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
-        <!-- <link rel="stylesheet" href="assets/plugins/chartjs-bar-chart/chart.css"> -->
-        <!--Custom CSS-->
-        <link rel="stylesheet" href="{{asset('public/panel/assets/css/style.css')}}">
-    </head>
-    <body id="page-top">
-        <!-- preloader -->
-        <div class="preloader">
-            <img src="{{ asset('public/panel/assets/images/preloader.gif')}}" alt="">
-        </div>
-        <!-- wrapper -->
-        <div class="wrapper">
-           @guest
-           @else
-            <!-- header area -->
-            <header class="header_area">
-                <!-- logo -->
-                <div class="sidebar_logo">
-                    <a href="index.html">
-                        <img src="{{ asset('public/panel/assets/images/logo.png')}}" alt="" class="img-fluid logo1">
-                        <img src="{{ asset('public/panel/assets/images/logo_small.png')}}" alt="" class="img-fluid logo2">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Twitter -->
+    <meta name="twitter:site" content="@themepixels">
+    <meta name="twitter:creator" content="@themepixels">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Starlight">
+    <meta name="twitter:description" content="Premium Quality and Responsive UI for Dashboard.">
+    <meta name="twitter:image" content="http://themepixels.me/starlight/img/starlight-social.png">
+
+    <!-- Facebook -->
+    <meta property="og:url" content="http://themepixels.me/starlight">
+    <meta property="og:title" content="Starlight">
+    <meta property="og:description" content="Premium Quality and Responsive UI for Dashboard.">
+
+    <meta property="og:image" content="http://themepixels.me/starlight/img/starlight-social.png">
+    <meta property="og:image:secure_url" content="http://themepixels.me/starlight/img/starlight-social.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600">
+
+    <!-- Meta -->
+    <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
+    <meta name="author" content="ThemePixels">
+
+    <title>Ecommerce Admin Panel</title>
+
+    <!-- vendor css -->
+    <link href="{{asset('public/backend/lib/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
+    <link href="{{asset('public/backend/lib/Ionicons/css/ionicons.css')}}" rel="stylesheet">
+    <link href="{{asset('public/backend/lib/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet">
+    <link href="{{asset('public/backend/lib/rickshaw/rickshaw.min.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+
+    <!-- Starlight CSS -->
+    <link rel="stylesheet" href="{{asset('public/backend/css/starlight.css')}}">
+</head>
+
+<body>
+
+    @guest
+
+
+
+    @else
+    <!-- ########## START: LEFT PANEL ########## -->
+    <div class="sl-logo"><a href=""><i class="icon ion-android-star-outline"></i> starlight</a></div>
+    <div class="sl-sideleft">
+        <div class="input-group input-group-search">
+            <input type="search" name="search" class="form-control" placeholder="Search">
+            <span class="input-group-btn">
+                <button class="btn"><i class="fa fa-search"></i></button>
+            </span><!-- input-group-btn -->
+        </div><!-- input-group -->
+
+        <label class="sidebar-label">Navigation</label>
+        <div class="sl-sideleft-menu">
+            <a href="index.html" class="sl-menu-link active">
+                <div class="sl-menu-item">
+                    <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+                    <span class="menu-item-label">Dashboard</span>
+                </div><!-- menu-item -->
+            </a><!-- sl-menu-link -->
+            <a href="widgets.html" class="sl-menu-link">
+                <div class="sl-menu-item">
+                    <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
+                    <span class="menu-item-label">Cards &amp; Widgets</span>
+                </div><!-- menu-item -->
+            </a><!-- sl-menu-link -->
+            <a href="#" class="sl-menu-link">
+                <div class="sl-menu-item">
+                    <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+                    <span class="menu-item-label">Charts</span>
+                    <i class="menu-item-arrow fa fa-angle-down"></i>
+                </div><!-- menu-item -->
+            </a><!-- sl-menu-link -->
+            <ul class="sl-menu-sub nav flex-column">
+                <li class="nav-item"><a href="chart-morris.html" class="nav-link">Morris Charts</a></li>
+                <li class="nav-item"><a href="chart-flot.html" class="nav-link">Flot Charts</a></li>
+                <li class="nav-item"><a href="chart-chartjs.html" class="nav-link">Chart JS</a></li>
+                <li class="nav-item"><a href="chart-rickshaw.html" class="nav-link">Rickshaw</a></li>
+                <li class="nav-item"><a href="chart-sparkline.html" class="nav-link">Sparkline</a></li>
+            </ul>
+            <a href="#" class="sl-menu-link">
+                <div class="sl-menu-item">
+                    <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
+                    <span class="menu-item-label">Forms</span>
+                    <i class="menu-item-arrow fa fa-angle-down"></i>
+                </div><!-- menu-item -->
+            </a><!-- sl-menu-link -->
+            <ul class="sl-menu-sub nav flex-column">
+                <li class="nav-item"><a href="form-elements.html" class="nav-link">Form Elements</a></li>
+                <li class="nav-item"><a href="form-layouts.html" class="nav-link">Form Layouts</a></li>
+                <li class="nav-item"><a href="form-validation.html" class="nav-link">Form Validation</a></li>
+                <li class="nav-item"><a href="form-wizards.html" class="nav-link">Form Wizards</a></li>
+                <li class="nav-item"><a href="form-editor-text.html" class="nav-link">Text Editor</a></li>
+            </ul>
+            <a href="#" class="sl-menu-link">
+                <div class="sl-menu-item">
+                    <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
+                    <span class="menu-item-label">UI Elements</span>
+                    <i class="menu-item-arrow fa fa-angle-down"></i>
+                </div><!-- menu-item -->
+            </a><!-- sl-menu-link -->
+            <ul class="sl-menu-sub nav flex-column">
+                <li class="nav-item"><a href="accordion.html" class="nav-link">Accordion</a></li>
+                <li class="nav-item"><a href="alerts.html" class="nav-link">Alerts</a></li>
+                <li class="nav-item"><a href="buttons.html" class="nav-link">Buttons</a></li>
+                <li class="nav-item"><a href="cards.html" class="nav-link">Cards</a></li>
+                <li class="nav-item"><a href="icons.html" class="nav-link">Icons</a></li>
+                <li class="nav-item"><a href="modal.html" class="nav-link">Modal</a></li>
+                <li class="nav-item"><a href="navigation.html" class="nav-link">Navigation</a></li>
+                <li class="nav-item"><a href="pagination.html" class="nav-link">Pagination</a></li>
+                <li class="nav-item"><a href="popups.html" class="nav-link">Tooltip &amp; Popover</a></li>
+                <li class="nav-item"><a href="progress.html" class="nav-link">Progress</a></li>
+                <li class="nav-item"><a href="spinners.html" class="nav-link">Spinners</a></li>
+                <li class="nav-item"><a href="typography.html" class="nav-link">Typography</a></li>
+            </ul>
+            <a href="#" class="sl-menu-link">
+                <div class="sl-menu-item">
+                    <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
+                    <span class="menu-item-label">Tables</span>
+                    <i class="menu-item-arrow fa fa-angle-down"></i>
+                </div><!-- menu-item -->
+            </a><!-- sl-menu-link -->
+            <ul class="sl-menu-sub nav flex-column">
+                <li class="nav-item"><a href="table-basic.html" class="nav-link">Basic Table</a></li>
+                <li class="nav-item"><a href="table-datatable.html" class="nav-link">Data Table</a></li>
+            </ul>
+            <a href="#" class="sl-menu-link">
+                <div class="sl-menu-item">
+                    <i class="menu-item-icon icon ion-ios-navigate-outline tx-24"></i>
+                    <span class="menu-item-label">Maps</span>
+                    <i class="menu-item-arrow fa fa-angle-down"></i>
+                </div><!-- menu-item -->
+            </a><!-- sl-menu-link -->
+            <ul class="sl-menu-sub nav flex-column">
+                <li class="nav-item"><a href="map-google.html" class="nav-link">Google Maps</a></li>
+                <li class="nav-item"><a href="map-vector.html" class="nav-link">Vector Maps</a></li>
+            </ul>
+            <a href="mailbox.html" class="sl-menu-link">
+                <div class="sl-menu-item">
+                    <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
+                    <span class="menu-item-label">Mailbox</span>
+                </div><!-- menu-item -->
+            </a><!-- sl-menu-link -->
+            <a href="#" class="sl-menu-link">
+                <div class="sl-menu-item">
+                    <i class="menu-item-icon icon ion-ios-paper-outline tx-22"></i>
+                    <span class="menu-item-label">Pages</span>
+                    <i class="menu-item-arrow fa fa-angle-down"></i>
+                </div><!-- menu-item -->
+            </a><!-- sl-menu-link -->
+            <ul class="sl-menu-sub nav flex-column">
+                <li class="nav-item"><a href="blank.html" class="nav-link">Blank Page</a></li>
+                <li class="nav-item"><a href="page-signin.html" class="nav-link">Signin Page</a></li>
+                <li class="nav-item"><a href="page-signup.html" class="nav-link">Signup Page</a></li>
+                <li class="nav-item"><a href="page-notfound.html" class="nav-link">404 Page Not Found</a></li>
+            </ul>
+        </div><!-- sl-sideleft-menu -->
+
+        <br>
+    </div><!-- sl-sideleft -->
+    <!-- ########## END: LEFT PANEL ########## -->
+
+    <!-- ########## START: HEAD PANEL ########## -->
+    <div class="sl-header">
+        <div class="sl-header-left">
+            <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
+            <div class="navicon-left hidden-lg-up"><a id="btnLeftMenuMobile" href=""><i class="icon ion-navicon-round"></i></a></div>
+        </div><!-- sl-header-left -->
+        <div class="sl-header-right">
+            <nav class="nav">
+                <div class="dropdown">
+                    <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+                        <span class="logged-name">Jane<span class="hidden-md-down"> Doe</span></span>
+                        <img src="../img/img3.jpg" class="wd-32 rounded-circle" alt="">
                     </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-200">
+                        <ul class="list-unstyled user-profile-nav">
+                            <li><a href=""><i class="icon ion-ios-person-outline"></i> Edit Profile</a></li>
+                            <li><a href=""><i class="icon ion-ios-gear-outline"></i> Settings</a></li>
+                            <li><a href=""><i class="icon ion-ios-download-outline"></i> Downloads</a></li>
+                            <li><a href=""><i class="icon ion-ios-star-outline"></i> Favorites</a></li>
+                            <li><a href=""><i class="icon ion-ios-folder-outline"></i> Collections</a></li>
+                            <li><a href="{{route('admin.logout')}}"><i class="icon ion-power"></i> Sign Out</a></li>
+                        </ul>
+                    </div><!-- dropdown-menu -->
+                </div><!-- dropdown -->
+            </nav>
+            <div class="navicon-right">
+                <a id="btnRightMenu" href="" class="pos-relative">
+                    <i class="icon ion-ios-bell-outline"></i>
+                    <!-- start: if statement -->
+                    <span class="square-8 bg-danger"></span>
+                    <!-- end: if statement -->
+                </a>
+            </div><!-- navicon-right -->
+        </div><!-- sl-header-right -->
+    </div><!-- sl-header -->
+    <!-- ########## END: HEAD PANEL ########## -->
+
+    <!-- ########## START: RIGHT PANEL ########## -->
+    <div class="sl-sideright">
+        <ul class="nav nav-tabs nav-fill sidebar-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" role="tab" href="#messages">Messages (2)</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" role="tab" href="#notifications">Notifications (8)</a>
+            </li>
+        </ul><!-- sidebar-tabs -->
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane pos-absolute a-0 mg-t-60 active" id="messages" role="tabpanel">
+                <div class="media-list">
+                    <!-- loop starts here -->
+                    <a href="" class="media-list-link">
+                        <div class="media">
+                            <img src="../img/img3.jpg" class="wd-40 rounded-circle" alt="">
+                            <div class="media-body">
+                                <p class="mg-b-0 tx-medium tx-gray-800 tx-13">Donna Seay</p>
+                                <span class="d-block tx-11 tx-gray-500">2 minutes ago</span>
+                                <p class="tx-13 mg-t-10 mg-b-0">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring.</p>
+                            </div>
+                        </div><!-- media -->
+                    </a>
+                    <!-- loop ends here -->
+                    <a href="" class="media-list-link">
+                        <div class="media">
+                            <img src="../img/img4.jpg" class="wd-40 rounded-circle" alt="">
+                            <div class="media-body">
+                                <p class="mg-b-0 tx-medium tx-gray-800 tx-13">Samantha Francis</p>
+                                <span class="d-block tx-11 tx-gray-500">3 hours ago</span>
+                                <p class="tx-13 mg-t-10 mg-b-0">My entire soul, like these sweet mornings of spring.</p>
+                            </div>
+                        </div><!-- media -->
+                    </a>
+                    <a href="" class="media-list-link">
+                        <div class="media">
+                            <img src="../img/img7.jpg" class="wd-40 rounded-circle" alt="">
+                            <div class="media-body">
+                                <p class="mg-b-0 tx-medium tx-gray-800 tx-13">Robert Walker</p>
+                                <span class="d-block tx-11 tx-gray-500">5 hours ago</span>
+                                <p class="tx-13 mg-t-10 mg-b-0">I should be incapable of drawing a single stroke at the present moment...</p>
+                            </div>
+                        </div><!-- media -->
+                    </a>
+                    <a href="" class="media-list-link">
+                        <div class="media">
+                            <img src="../img/img5.jpg" class="wd-40 rounded-circle" alt="">
+                            <div class="media-body">
+                                <p class="mg-b-0 tx-medium tx-gray-800 tx-13">Larry Smith</p>
+                                <span class="d-block tx-11 tx-gray-500">Yesterday, 8:34pm</span>
+
+                                <p class="tx-13 mg-t-10 mg-b-0">When, while the lovely valley teems with vapour around me, and the meridian sun strikes...</p>
+                            </div>
+                        </div><!-- media -->
+                    </a>
+                    <a href="" class="media-list-link">
+                        <div class="media">
+                            <img src="../img/img3.jpg" class="wd-40 rounded-circle" alt="">
+                            <div class="media-body">
+                                <p class="mg-b-0 tx-medium tx-gray-800 tx-13">Donna Seay</p>
+                                <span class="d-block tx-11 tx-gray-500">Jan 23, 2:32am</span>
+                                <p class="tx-13 mg-t-10 mg-b-0">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring.</p>
+                            </div>
+                        </div><!-- media -->
+                    </a>
+                </div><!-- media-list -->
+                <div class="pd-15">
+                    <a href="" class="btn btn-secondary btn-block bd-0 rounded-0 tx-10 tx-uppercase tx-mont tx-medium tx-spacing-2">View More Messages</a>
                 </div>
-                <div class="sidebar_btn">
-                    <button class="sidbar-toggler-btn"><i class="fas fa-bars"></i></button>
-                </div>
-                <ul class="header_menu">
-                    <li><a href="#" class="search_btn" data-toggle="modal" data-target="#myModal"><i class="fas fa-search"></i></a>
-                        <div class="modal fade search_box" id="myModal">
-                              <button type="button" class="close m-2 text-white float-right" data-dismiss="modal">&times;</button>
-                              <form action="#" class="modal-dialog modal-lg">
-                                
-                                <div class="modal-content bg-transparent">
-                                      <!-- Modal body -->
-                                      <div class="modal-body">
-                                        <input class="form-control bg-transparent text-white form-control-lg"  type="text" placeholder="Search...">
-                                        <button class="btn btn-lg submit-btn" type="submit">Search</button>
-                                      </div>
-                                </div>
-                                 
-                              </form>
-                        </div>
-                    </li>
-                    <li><a data-toggle="dropdown" href="#"><i class="far fa-envelope"></i><span>4</span></a>
-                        <div class="dropdown_wrapper messages_item dropdown-menu dropdown-menu-right">
-                            <div class="dropdown_header">
-                                <p>you have 4 messages</p>
+            </div><!-- #messages -->
+
+            <div class="tab-pane pos-absolute a-0 mg-t-60 overflow-y-auto" id="notifications" role="tabpanel">
+                <div class="media-list">
+                    <!-- loop starts here -->
+                    <a href="" class="media-list-link read">
+                        <div class="media pd-x-20 pd-y-15">
+                            <img src="../img/img8.jpg" class="wd-40 rounded-circle" alt="">
+                            <div class="media-body">
+                                <p class="tx-13 mg-b-0 tx-gray-700"><strong class="tx-medium tx-gray-800">Suzzeth Bungaos</strong> tagged you and 18 others in a post.</p>
+                                <span class="tx-12">October 03, 2017 8:45am</span>
                             </div>
-                            <ul class="dropdown_body nice_scroll scrollbar">
-                                <li>
-                                    <a href="#">
-                                        <div class="img-part">
-                                            <img src="assets/images/user1.jpg" alt="" class="img-fluid">
-                                        </div>
-                                        <div class="text-part">
-                                            <h6>Madelyn <span><i class="far fa-clock"></i> today</span></h6>
-                                            <p>Hello Sam...</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="img-part">
-                                            <img src="assets/images/user2.jpg" alt="" class="img-fluid">
-                                        </div>
-                                        <div class="text-part">
-                                            <h6>Melvin <span><i class="far fa-clock"></i> today</span></h6>
-                                            <p>Hello jhon...</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="img-part">
-                                            <img src="assets/images/user3.jpg" alt="" class="img-fluid">
-                                        </div>
-                                        <div class="text-part">
-                                            <h6>Olinda <span><i class="far fa-clock"></i> today</span></h6>
-                                            <p>Hello jhon...</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="img-part">
-                                            <img src="assets/images/user1.jpg" alt="" class="img-fluid">
-                                        </div>
-                                        <div class="text-part">
-                                            <h6>Johnson <span><i class="far fa-clock"></i> today</span></h6>
-                                            <p>Hello Olinda...</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="img-part">
-                                            <img src="assets/images/user3.jpg" alt="" class="img-fluid">
-                                        </div>
-                                        <div class="text-part">
-                                            <h6>Madelyn <span><i class="far fa-clock"></i> today</span></h6>
-                                            <p>Hello Sam...</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="img-part">
-                                            <img src="assets/images/user2.jpg" alt="" class="img-fluid">
-                                        </div>
-                                        <div class="text-part">
-                                            <h6>Melvin <span><i class="far fa-clock"></i> today</span></h6>
-                                            <p>Hello jhon...</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="img-part">
-                                            <img src="assets/images/user3.jpg" alt="" class="img-fluid">
-                                        </div>
-                                        <div class="text-part">
-                                            <h6>Olinda <span><i class="far fa-clock"></i> today</span></h6>
-                                            <p>Hello jhon...</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="img-part">
-                                            <img src="assets/images/user1.jpg" alt="" class="img-fluid">
-                                        </div>
-                                        <div class="text-part">
-                                            <h6>Johnson <span><i class="far fa-clock"></i> today</span></h6>
-                                            <p>Hello Olinda...</p>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="dropdown_footer">
-                                <a href="#">See All Messages</a>
+                        </div><!-- media -->
+                    </a>
+                    <!-- loop ends here -->
+                    <a href="" class="media-list-link read">
+                        <div class="media pd-x-20 pd-y-15">
+                            <img src="../img/img9.jpg" class="wd-40 rounded-circle" alt="">
+                            <div class="media-body">
+                                <p class="tx-13 mg-b-0 tx-gray-700"><strong class="tx-medium tx-gray-800">Mellisa Brown</strong> appreciated your work <strong class="tx-medium tx-gray-800">The Social Network</strong></p>
+                                <span class="tx-12">October 02, 2017 12:44am</span>
                             </div>
-                        </div>
-                    </li>
-                    <li><a href="#" data-toggle="dropdown"><i class="far fa-bell"></i><span>9</span></a>
-                        <div class="dropdown_wrapper notification_item dropdown-menu dropdown-menu-right">
-                            <div class="dropdown_header">
-                                <p>You have 9 notifications</p>
+                        </div><!-- media -->
+                    </a>
+                    <a href="" class="media-list-link read">
+                        <div class="media pd-x-20 pd-y-15">
+                            <img src="../img/img10.jpg" class="wd-40 rounded-circle" alt="">
+                            <div class="media-body">
+                                <p class="tx-13 mg-b-0 tx-gray-700">20+ new items added are for sale in your <strong class="tx-medium tx-gray-800">Sale Group</strong></p>
+                                <span class="tx-12">October 01, 2017 10:20pm</span>
                             </div>
-                            <ul class="dropdown_body scrollbar nice_scroll">
-                                <li>
-                                    <a href="#">
-                                        <div class="img-part">
-                                            <span class="text-success"><i class="fas fa-users"></i></span>
-                                        </div>
-                                        <div class="text-part">
-                                            <p>5 new members joined</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="img-part">
-                                            <span class="text-danger"><i class="fas fa-exclamation-triangle"></i></span>
-                                        </div>
-                                        <div class="text-part">
-                                            <p> Very long description here that may...</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="img-part">
-                                            <span class="text-success"><i class="fas fa-cart-plus"></i></span>
-                                        </div>
-                                        <div class="text-part">
-                                            <p> 25 sales made</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="img-part">
-                                            <span class="text-warning"><i class="fas fa-user"></i></span>
-                                        </div>
-                                        <div class="text-part">
-                                            <p> You changed your username</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="img-part">
-                                            <span class="text-success"><i class="fas fa-users"></i></span>
-                                        </div>
-                                        <div class="text-part">
-                                            <p>5 new members joined</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="img-part">
-                                            <span class="text-danger"><i class="fas fa-exclamation-triangle"></i></span>
-                                        </div>
-                                        <div class="text-part">
-                                            <p> Very long description here that may...</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="img-part">
-                                            <span class="text-success"><i class="fas fa-cart-plus"></i></span>
-                                        </div>
-                                        <div class="text-part">
-                                            <p> 25 sales made</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="img-part">
-                                            <span class="text-warning"><i class="fas fa-user"></i></span>
-                                        </div>
-                                        <div class="text-part">
-                                            <p> You changed your username</p>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="dropdown_footer">
-                                <a href="#">view All</a>
+                        </div><!-- media -->
+                    </a>
+                    <a href="" class="media-list-link read">
+                        <div class="media pd-x-20 pd-y-15">
+                            <img src="../img/img5.jpg" class="wd-40 rounded-circle" alt="">
+                            <div class="media-body">
+                                <p class="tx-13 mg-b-0 tx-gray-700"><strong class="tx-medium tx-gray-800">Julius Erving</strong> wants to connect with you on your conversation with <strong class="tx-medium tx-gray-800">Ronnie Mara</strong></p>
+                                <span class="tx-12">October 01, 2017 6:08pm</span>
                             </div>
-                        </div>
-                    </li>
-                    <li><a data-toggle="dropdown" href="#"><i class="far fa-user"></i></a>
-                            <div class="user_item dropdown-menu dropdown-menu-right">
-                                <div class="admin">
-                                    <a href="#" class="user_link"><img src="assets/images/admin.jpg" alt=""></a>
-                                </div>
-                            <ul>
-                                
-                                <li><a href="#"><span><i class="fas fa-user"></i></span> User Profile</a></li>
-                                <li><a href="{{route('admin.password.change')}}"><span><i class="fas fa-cogs"></i></span>  Password Change</a></li>
-                                <li>
+                        </div><!-- media -->
+                    </a>
+                    <a href="" class="media-list-link read">
+                        <div class="media pd-x-20 pd-y-15">
+                            <img src="../img/img8.jpg" class="wd-40 rounded-circle" alt="">
+                            <div class="media-body">
+                                <p class="tx-13 mg-b-0 tx-gray-700"><strong class="tx-medium tx-gray-800">Suzzeth Bungaos</strong> tagged you and 12 others in a post.</p>
+                                <span class="tx-12">September 27, 2017 6:45am</span>
+                            </div>
+                        </div><!-- media -->
+                    </a>
+                    <a href="" class="media-list-link read">
+                        <div class="media pd-x-20 pd-y-15">
+                            <img src="../img/img10.jpg" class="wd-40 rounded-circle" alt="">
+                            <div class="media-body">
+                                <p class="tx-13 mg-b-0 tx-gray-700">10+ new items added are for sale in your <strong class="tx-medium tx-gray-800">Sale Group</strong></p>
+                                <span class="tx-12">September 28, 2017 11:30pm</span>
+                            </div>
+                        </div><!-- media -->
+                    </a>
+                    <a href="" class="media-list-link read">
+                        <div class="media pd-x-20 pd-y-15">
+                            <img src="../img/img9.jpg" class="wd-40 rounded-circle" alt="">
+                            <div class="media-body">
+                                <p class="tx-13 mg-b-0 tx-gray-700"><strong class="tx-medium tx-gray-800">Mellisa Brown</strong> appreciated your work <strong class="tx-medium tx-gray-800">The Great Pyramid</strong></p>
+                                <span class="tx-12">September 26, 2017 11:01am</span>
+                            </div>
+                        </div><!-- media -->
+                    </a>
+                    <a href="" class="media-list-link read">
+                        <div class="media pd-x-20 pd-y-15">
+                            <img src="../img/img5.jpg" class="wd-40 rounded-circle" alt="">
+                            <div class="media-body">
+                                <p class="tx-13 mg-b-0 tx-gray-700"><strong class="tx-medium tx-gray-800">Julius Erving</strong> wants to connect with you on your conversation with <strong class="tx-medium tx-gray-800">Ronnie Mara</strong></p>
+                                <span class="tx-12">September 23, 2017 9:19pm</span>
+                            </div>
+                        </div><!-- media -->
+                    </a>
+                </div><!-- media-list -->
+            </div><!-- #notifications -->
 
-                                    <a href="{{route('admin.logout')}}"><span><i class="fas fa-unlock-alt"></i></span> Logout</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
+        </div><!-- tab-content -->
+    </div><!-- sl-sideright -->
+    <!-- ########## END: RIGHT PANEL ########## --->
 
-                        <a class="responsive_menu_toggle" href="#"><i class="fas fa-bars"></i></a></li>
-                </ul>
-            </header><!-- / header area -->
-            <!-- sidebar area -->
-            <aside class="sidebar-wrapper ">
-              <nav class="sidebar-nav">
-                 <ul class="metismenu" id="menu1">
-                    <li class="single-nav-wrapper">
-                        <a href="index.html" class="menu-item">
-                            <span class="left-icon"><i class="fas fa-home"></i></span>
-                            <span class="menu-text">home</span>
-                        </a>
-                      </li>
-                    <li class="single-nav-wrapper">
-                          <a class="menu-item" href="fomrs_editor_ch.html" aria-expanded="false">
-                            <span class="left-icon"><i class="far fa-edit"></i></span>
-                              <span class="menu-text">Forms</span>
-                          </a>
-                      </li>
-                      <li class="single-nav-wrapper">
-                          <a class="has-arrow menu-item" href="#" aria-expanded="false">
-                            <span class="left-icon"><i class="fas fa-table"></i></span>
-                              <span class="menu-text">table</span>
-                          </a>
-                            <ul class="dashboard-menu">
-                              <li><a href="basic_table.html">Basic table</a></li>
-                              <li><a href="data_table.html">data table</a></li>
-                            </ul>
-                      </li>
-                      <li class="single-nav-wrapper">
-                          <a class="has-arrow menu-item" href="#" aria-expanded="false">
-                            <span class="left-icon"><i class="fas fa-chart-line"></i></span>
-                            <span class="menu-text">Charts</span>
-                          </a>
-                            <ul class="dashboard-menu">
-                              <li><a href="chart-float.html">Float Chart</a></li>
-                              <li><a href="chart-float.html">Float Chart</a></li>
-                              <li><a href="chart-float.html">Float Chart</a></li>
-                           </ul>
-                      </li>
-                      <li class="single-nav-wrapper">
-                          <a class="has-arrow menu-item" href="#" aria-expanded="false">
-                            <span class="left-icon"><i class="fas fa-sort-alpha-down-alt"></i></span>
-                            <span class="menu-text">UI Elements</span>
-                          </a>
-                            <ul class="dashboard-menu">
-                                <li><a href="typography.html">Typography</a></li>
-                                <li><a href="button.html">Buttons</a></li>
-                                <li><a href="notification.html">Notification</a></li>
-                                <li><a href="panels.html">Panels</a></li>
-                                <li><a href="tabs.html">Tab</a></li>
-                                <li><a href="modals.html">Modals</a></li>
-                                <li><a href="progressbars.html">Progressber</a></li>
-                                <li><a href="list.html">List View</a></li>
-                                <li><a href="icheck_toggle_pagination.html">iCheck, Toggle</a></li>
-                                <li><a href="label-badge-alert.html">labels, Badges</a></li>
-                                <li><a href="treeview.html">Tree View</a></li>
-                           </ul>
-                      </li>
-                      <li class="single-nav-wrapper">
-                          <a class="has-arrow menu-item" href="#" aria-expanded="false">
-                            <span class="left-icon"><i class="fas fa-map-marker-alt"></i></span>
-                            <span class="menu-text">Maps</span>
-                          </a>
-                          <ul class="dashboard-menu">
-                            <li><a href="#">Amcharts Maps</a></li>
-                            <li><a href="#">Data Maps</a></li>
-                            <li><a href="#">Jvector Maps</a></li>
-                            <li><a href="#">Google map</a></li>
-                            <li><a href="#">Snazzy Map</a></li>
-                          </ul>
-                      </li>
-                      <li class="single-nav-wrapper">
-                          <a class="has-arrow menu-item" href="#" aria-expanded="false">
-                            <span class="left-icon"><i class="far fa-envelope"></i></span>
-                            <span class="menu-text">Mailbox</span>
-                          </a>
-                          <ul class="dashboard-menu">
-                            <li><a href="#">Mailbox</a></li>
-                            <li><a href="#">Mailbox Details</a></li>
-                            <li><a href="#">Compose</a></li>
-                          </ul>
-                      </li>
-                      <li class="single-nav-wrapper">
-                          <a class="has-arrow menu-item" href="#" aria-expanded="false">
-                            <span class="left-icon"><i class="fas fa-mobile-alt"></i></span>
-                            <span class="menu-text">App View</span>
-                          </a>
-                          <ul class="dashboard-menu">
-                            <li><a href="invoice.html">Invoice</a></li>
-                            <li><a href="#">Vertical timeline</a></li>
-                            <li><a href="#">Horizontal timeline</a></li>
-                            <li><a href="#">Pricing Table</a></li>
-                          </ul>
-                      </li>
-                      <li class="single-nav-wrapper">
-                          <a class="has-arrow menu-item" href="#" aria-expanded="false">
-                            <span class="left-icon"><i class="far fa-copy"></i></span>
-                            <span class="menu-text">Other pages</span>
-                          </a>
-                          <ul class="dashboard-menu">
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="registration.html">Register</a></li>
-                            <li><a href="screen_lock.html">screen lock</a></li>
-                            <li><a href="forget.html">forget Password</a></li>
-                          </ul>
-                      </li>
-                      <li class="single-nav-wrapper">
-                        <a href="#" class="menu-item">
-                            <span class="left-icon"><i class="fas fa-home"></i></span>
-                            <span class="menu-text">Calender</span>
-                        </a>
-                      </li>
-                      <li class="single-nav-wrapper">
-                        <a href="blank_page.html" class="menu-item">
-                            <span class="left-icon"><i class="fas fa-file"></i></span>
-                            <span class="menu-text">Blank Page</span>
-                        </a>
-                      </li>
-                    </ul>
-              </nav>
-            </aside><!-- /sidebar Area-->
+    @endguest
+
+    @yield('admin_content')
 
 
-           @endguest
 
-           @yield('admin_content')
-        </div><!--/ wrapper -->
+    <script src="{{asset('public/backend/lib/jquery/jquery.js')}}"></script>
+    <script src="{{asset('public/backend/lib/popper.js/popper.js')}}"></script>
+    <script src="{{asset('public/backend/lib/bootstrap/bootstrap.js')}}"></script>
+    <script src="{{asset('public/backend/lib/jquery-ui/jquery-ui.js')}}"></script>
+    <script src="{{asset('public/backend/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js')}}"></script>
+    <script src="{{asset('public/backend/lib/jquery.sparkline.bower/jquery.sparkline.min.js')}}"></script>
+    <script src="{{asset('public/backend/lib/d3/d3.js')}}"></script>
+    <script src="{{asset('public/backend/lib/rickshaw/rickshaw.min.js')}}"></script>
+    <script src="{{asset('public/backend/lib/chart.js/Chart.js')}}"></script>
+    <script src="{{asset('public/backend/lib/Flot/jquery.flot.js')}}"></script>
+    <script src="{{asset('public/backend/lib/Flot/jquery.flot.pie.js')}}"></script>
+    <script src="{{asset('public/backend/lib/Flot/jquery.flot.resize.js')}}"></script>
+    <script src="{{asset('public/backend/lib/flot-spline/jquery.flot.spline.js')}}"></script>
+    <script src="{{asset('public/backend/js/starlight.js')}}"></script>
+    <script src="{{asset('public/backend/js/ResizeSensor.js')}}"></script>
+    <script src="{{asset('public/backend/js/dashboard.js')}}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
 
 
-        
-        <!-- jquery -->
-        <script src="{{asset('public/panel/assets/js/jquery.min.js')}}"></script>
-        <!-- popper Min Js -->
-        <script src="{{asset('public/panel/assets/js/popper.min.js')}}"></script>
-        <!-- Bootstrap Min Js -->
-        <script src="{{asset('public/panel/assets/js/bootstrap.min.js')}}"></script>
-        <!-- Fontawesome-->
-        <script src="{{asset('public/panel/assets/js/all.min.js')}}"></script>
-        <!-- metis menu -->
-        <script src="{{asset('public/panel/assets/plugins/metismenu-3.0.4/assets/js/metismenu.js')}}"></script>
-        <script src="{{asset('public/panel/assets/plugins/metismenu-3.0.4/assets/js/mm-vertical-hover.js')}}"></script>
-        <!-- nice scroll bar -->
-        <script src='{{asset('public/panel/assets/plugins/scrollbar/jquery.nicescroll.min.js')}}'></script>
-        <script src="{{asset('public/panel/assets/plugins/scrollbar/scroll.active.js')}}"></script>
-        <!-- counter -->
-        <script src="{{asset('public/panel/assets/plugins/counter/js/counter.js')}}"></script>
-        <!-- chart -->
-        <script src='{{asset('public/panel/assets/plugins/chartjs-bar-chart/Chart.min.js')}}'></script>
-        <script src="{{asset('public/panel/assets/plugins/chartjs-bar-chart/chart.js')}}"></script>
-        <!-- pie chart -->
-        <script src="{{asset('public/panel/assets/plugins/pie_chart/chart.loader.js')}}"></script>
-        <script src="{{asset('public/panel/assets/plugins/pie_chart/pie.active.js')}}"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
-        <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
-        <!-- Main js -->
-        <script src="{{asset('public/panel/assets/js/main.js')}}"></script>
-
-         <script>
+    <script>
         @if(Session::has('messege'))
-          var type="{{Session::get('alert-type','info')}}"
-          switch(type){
-              case 'info':
-                   toastr.info("{{ Session::get('messege') }}");
-                   break;
-              case 'success':
-                  toastr.success("{{ Session::get('messege') }}");
-                  break;
-              case 'warning':
-                 toastr.warning("{{ Session::get('messege') }}");
-                  break;
-              case 'error':
-                  toastr.error("{{ Session::get('messege') }}");
-                  break;
-          }
+        var type = "{{Session::get('alert-type','info')}}"
+        switch (type) {
+            case 'info':
+                toastr.info("{{ Session::get('messege') }}");
+                break;
+            case 'success':
+                toastr.success("{{ Session::get('messege') }}");
+                break;
+            case 'warning':
+                toastr.warning("{{ Session::get('messege') }}");
+                break;
+            case 'error':
+                toastr.error("{{ Session::get('messege') }}");
+                break;
+        }
         @endif
-     </script>  
-
-     <script>  
-         $(document).on("click", "#delete", function(e){
-             e.preventDefault();
-             var link = $(this).attr("href");
-                swal({
-                  title: "Are you Want to delete?",
-                  text: "Once Delete, This will be Permanently Delete!",
-                  icon: "warning",
-                  buttons: true,
-                  dangerMode: true,
-                })
-                .then((willDelete) => {
-                  if (willDelete) {
-                       window.location.href = link;
-                  } else {
-                    swal("Safe Data!");
-                  }
-                });
-            });
     </script>
 
+    <script>
+        $(document).on("click", "#delete", function(e) {
+            e.preventDefault();
+            var link = $(this).attr("href");
+            swal({
+                    title: "Are you Want to delete?",
+                    text: "Once Delete, This will be Permanently Delete!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.location.href = link;
+                    } else {
+                        swal("Safe Data!");
+                    }
+                });
+        });
+    </script>
 
-    </body>
+</body>
+
 </html>

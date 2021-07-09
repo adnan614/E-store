@@ -1,6 +1,8 @@
 @extends('admin.admin_layouts')
 
 @section('admin_content')
+
+<br><br><br><br><br><br>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -20,9 +22,9 @@
                                 <input id="oldpass" type="password" class="form-control{{ $errors->has('oldpass') ? ' is-invalid' : '' }}" name="oldpass" value="{{ $oldpass ?? old('oldpass') }}" required autofocus>
 
                                 @if ($errors->has('oldpass'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('oldpass') }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('oldpass') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
@@ -34,9 +36,9 @@
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                                 @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>

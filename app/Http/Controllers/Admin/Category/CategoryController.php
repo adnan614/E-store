@@ -80,4 +80,42 @@ class CategoryController extends Controller
             return Redirect()->route('categories')->with($notification);
         }
     }
+
+    public function subcategories()
+    {
+        $category = DB::table('categories')->get();
+        $subcat = DB::table('subcategories')
+            ->join('categories', 'subcategories.category_id', 'categories.id')
+            ->select('subcategories.*', 'categories.category_name')
+            ->get();
+        return view('admin.category.subcategory', compact('category', 'subcat'));
+    }
+
+    public function storesubcat(Request $request)
+    {
+        $validatedData = $request->validate([
+            'category_id' => 'required',
+            'subcategory_name' => 'required|',
+        ]);
+
+        $data = array();
+        $data['category_id'] = $request->category_id;
+        $data['subcategory_name'] = $request->subcategory_name;
+        DB::table('subcategories')->insert($data);
+        $notification = array(
+            'messege' => 'Sub Category Inserted',
+            'alert-type' => 'success'
+        );
+        return Redirect()->back()->with($notification);
+    }
+
+    public function deleteSub($id)
+    {
+        DB::table('subcategories')->where('id', $id)->delete();
+        $notification = array(
+            'messege' => 'Sub Category Deleted',
+            'alert-type' => 'success'
+        );
+        return Redirect()->back()->with($notification);
+    }
 }

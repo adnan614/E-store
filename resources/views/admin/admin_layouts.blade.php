@@ -92,16 +92,12 @@
             <a href="#" class="sl-menu-link">
                 <div class="sl-menu-item">
                     <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
-                    <span class="menu-item-label">Forms</span>
+                    <span class="menu-item-label">Coupon</span>
                     <i class="menu-item-arrow fa fa-angle-down"></i>
                 </div><!-- menu-item -->
             </a><!-- sl-menu-link -->
             <ul class="sl-menu-sub nav flex-column">
-                <li class="nav-item"><a href="form-elements.html" class="nav-link">Form Elements</a></li>
-                <li class="nav-item"><a href="form-layouts.html" class="nav-link">Form Layouts</a></li>
-                <li class="nav-item"><a href="form-validation.html" class="nav-link">Form Validation</a></li>
-                <li class="nav-item"><a href="form-wizards.html" class="nav-link">Form Wizards</a></li>
-                <li class="nav-item"><a href="form-editor-text.html" class="nav-link">Text Editor</a></li>
+                <li class="nav-item"><a href="{{route('admin.coupon')}}" class="nav-link">Coupons</a></li>
             </ul>
             <a href="#" class="sl-menu-link">
                 <div class="sl-menu-item">
@@ -155,12 +151,12 @@
             <a href="#" class="sl-menu-link">
                 <div class="sl-menu-item">
                     <i class="menu-item-icon icon ion-ios-paper-outline tx-22"></i>
-                    <span class="menu-item-label">Pages</span>
+                    <span class="menu-item-label">Others</span>
                     <i class="menu-item-arrow fa fa-angle-down"></i>
                 </div><!-- menu-item -->
             </a><!-- sl-menu-link -->
             <ul class="sl-menu-sub nav flex-column">
-                <li class="nav-item"><a href="blank.html" class="nav-link">Blank Page</a></li>
+                <li class="nav-item"><a href="{{route('admin.newslater')}}" class="nav-link">News Laters</a></li>
                 <li class="nav-item"><a href="page-signin.html" class="nav-link">Signin Page</a></li>
                 <li class="nav-item"><a href="page-signup.html" class="nav-link">Signup Page</a></li>
                 <li class="nav-item"><a href="page-notfound.html" class="nav-link">404 Page Not Found</a></li>

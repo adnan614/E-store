@@ -794,7 +794,7 @@
                         </div>
                     </div>
                     <div class="newsletter_content clearfix">
-                        <form action="" class="newsletter_form" method="post">
+                        <form action="{{route('store.newslater')}}" class="newsletter_form" method="post">
                             @csrf
                             <input type="email" class="newsletter_input" required="required" placeholder="Enter your email address" name="email">
                             <button class="newsletter_button" type="submit">Subscribe</button>

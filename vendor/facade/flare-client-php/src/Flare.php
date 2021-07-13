@@ -2,50 +2,95 @@
 
 namespace Facade\FlareClient;
 
+use Error;
+use ErrorException;
 use Exception;
-use Throwable;
-use Illuminate\Pipeline\Pipeline;
-use Facade\FlareClient\Glows\Glow;
-use Facade\FlareClient\Http\Client;
-use Facade\FlareClient\Glows\Recorder;
 use Facade\FlareClient\Concerns\HasContext;
-use Facade\FlareClient\Enums\MessageLevels;
-use Facade\FlareClient\Middleware\AddGlows;
-use Illuminate\Contracts\Container\Container;
-use Facade\FlareClient\Middleware\AnonymizeIp;
 use Facade\FlareClient\Context\ContextContextDetector;
 use Facade\FlareClient\Context\ContextDetectorInterface;
+use Facade\FlareClient\Enums\MessageLevels;
+use Facade\FlareClient\Glows\Glow;
+use Facade\FlareClient\Glows\Recorder;
+use Facade\FlareClient\Http\Client;
+use Facade\FlareClient\Middleware\AddGlows;
+use Facade\FlareClient\Middleware\AnonymizeIp;
+use Facade\FlareClient\Middleware\CensorRequestBodyFields;
+use Illuminate\Contracts\Container\Container;
+use Illuminate\Pipeline\Pipeline;
+use Throwable;
 
 class Flare
 {
     use HasContext;
 
     /** @var \Facade\FlareClient\Http\Client */
-    private $client;
+    protected $client;
 
     /** @var \Facade\FlareClient\Api */
-    private $api;
+    protected $api;
 
     /** @var array */
-    private $middleware = [];
+    protected $middleware = [];
 
     /** @var \Facade\FlareClient\Glows\Recorder */
-    private $recorder;
+    protected $recorder;
 
     /** @var string */
-    private $applicationPath;
+    protected $applicationPath;
 
     /** @var \Illuminate\Contracts\Container\Container|null */
-    private $container;
+    protected $container;
 
     /** @var ContextDetectorInterface */
-    private $contextDetector;
+    protected $contextDetector;
+
+    /** @var callable|null */
+    protected $previousExceptionHandler;
+
+    /** @var callable|null */
+    protected $previousErrorHandler;
+
+    /** @var callable|null */
+    protected $determineVersionCallable;
+
+    /** @var int|null */
+    protected $reportErrorLevels;
+
+    /** @var callable|null */
+    protected $filterExceptionsCallable;
 
     public static function register(string $apiKey, string $apiSecret = null, ContextDetectorInterface $contextDetector = null, Container $container = null)
     {
         $client = new Client($apiKey, $apiSecret);
 
         return new static($client, $contextDetector, $container);
+    }
+
+    public function determineVersionUsing($determineVersionCallable)
+    {
+        $this->determineVersionCallable = $determineVersionCallable;
+    }
+
+    public function reportErrorLevels(int $reportErrorLevels)
+    {
+        $this->reportErrorLevels = $reportErrorLevels;
+    }
+
+    public function filterExceptionsUsing(callable $filterExceptionsCallable)
+    {
+        $this->filterExceptionsCallable = $filterExceptionsCallable;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function version()
+    {
+        if (! $this->determineVersionCallable) {
+            return null;
+        }
+
+        return ($this->determineVersionCallable)();
     }
 
     public function __construct(Client $client, ContextDetectorInterface $contextDetector = null, Container $container = null, array $middleware = [])
@@ -65,9 +110,24 @@ class Flare
         return $this->middleware;
     }
 
+    public function registerFlareHandlers()
+    {
+        $this->registerExceptionHandler();
+        $this->registerErrorHandler();
+
+        return $this;
+    }
+
     public function registerExceptionHandler()
     {
-        set_exception_handler([$this, 'handleException']);
+        $this->previousExceptionHandler = set_exception_handler([$this, 'handleException']);
+
+        return $this;
+    }
+
+    public function registerErrorHandler()
+    {
+        $this->previousErrorHandler = set_error_handler([$this, 'handleError']);
 
         return $this;
     }
@@ -100,6 +160,27 @@ class Flare
     public function handleException(Throwable $throwable)
     {
         $this->report($throwable);
+
+        if ($this->previousExceptionHandler) {
+            call_user_func($this->previousExceptionHandler, $throwable);
+        }
+    }
+
+    public function handleError($code, $message, $file = '', $line = 0)
+    {
+        $exception = new ErrorException($message, 0, $code, $file, $line);
+
+        $this->report($exception);
+
+        if ($this->previousErrorHandler) {
+            return call_user_func(
+                $this->previousErrorHandler,
+                $message,
+                $code,
+                $file,
+                $line
+            );
+        }
     }
 
     public function applicationPath(string $applicationPath)
@@ -111,6 +192,10 @@ class Flare
 
     public function report(Throwable $throwable, callable $callback = null)
     {
+        if (! $this->shouldSendReport($throwable)) {
+            return;
+        }
+
         $report = $this->createReport($throwable);
 
         if (! is_null($callback)) {
@@ -118,6 +203,23 @@ class Flare
         }
 
         $this->sendReportToApi($report);
+    }
+
+    protected function shouldSendReport(Throwable $throwable): bool
+    {
+        if ($this->reportErrorLevels && $throwable instanceof Error) {
+            return $this->reportErrorLevels & $throwable->getCode();
+        }
+
+        if ($this->reportErrorLevels && $throwable instanceof ErrorException) {
+            return $this->reportErrorLevels & $throwable->getSeverity();
+        }
+
+        if ($this->filterExceptionsCallable && $throwable instanceof Exception) {
+            return call_user_func($this->filterExceptionsCallable, $throwable);
+        }
+
+        return true;
     }
 
     public function reportMessage(string $message, string $logLevel, callable $callback = null)
@@ -163,7 +265,14 @@ class Flare
 
     public function anonymizeIp()
     {
-        $this->registerMiddleware(new AnonymizeIp);
+        $this->registerMiddleware(new AnonymizeIp());
+
+        return $this;
+    }
+
+    public function censorRequestBodyFields(array $fieldNames)
+    {
+        $this->registerMiddleware(new CensorRequestBodyFields($fieldNames));
 
         return $this;
     }
@@ -173,7 +282,8 @@ class Flare
         $report = Report::createForThrowable(
             $throwable,
             $this->contextDetector->detectCurrentContext(),
-            $this->applicationPath
+            $this->applicationPath,
+            $this->version()
         );
 
         return $this->applyMiddlewareToReport($report);

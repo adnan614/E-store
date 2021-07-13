@@ -63,6 +63,16 @@ Route::post('admin/update/coupon/{id}', 'Admin\Coupons\CouponController@updateCo
 Route::get('admin/newslater', 'Admin\Coupons\CouponController@newslater')->name('admin.newslater');
 Route::get('admin/newslater/delete/{id}', 'Admin\Coupons\CouponController@deleteNewslater')->name('delete.newslater');
 
+// product ---
+
+Route::get('admin/product/all', 'Admin\Product\ProductController@index')->name('all.product');
+
+Route::get('admin/product/add', 'Admin\Product\ProductController@create')->name('add.product');
+Route::post('admin/product/store', 'Admin\Product\ProductController@store')->name('store.product');
+
+// get sub category by ajax
+
+Route::get('get/subcategory/{category_id}', 'Admin\Product\ProductController@GetSubcat');
 
 
 

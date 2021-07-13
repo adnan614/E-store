@@ -22,8 +22,11 @@ use Psr\Container\ContainerInterface;
 trait ServiceSubscriberTrait
 {
     /** @var ContainerInterface */
-    private $container;
+    protected $container;
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedServices(): array
     {
         static $services;
@@ -40,7 +43,7 @@ trait ServiceSubscriberTrait
             }
 
             if (self::class === $method->getDeclaringClass()->name && ($returnType = $method->getReturnType()) && !$returnType->isBuiltin()) {
-                $services[self::class.'::'.$method->name] = '?'.$returnType->getName();
+                $services[self::class.'::'.$method->name] = '?'.($returnType instanceof \ReflectionNamedType ? $returnType->getName() : $returnType);
             }
         }
 
